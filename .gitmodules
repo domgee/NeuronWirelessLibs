@@ -20,5 +20,5 @@
 	url = git@github.com:Dygmalab/NeuronLedLibrary.git
 [submodule "kaleidoscope_adapter"]
 	path = kaleidoscope_adapter
-	url = git@github.com:Dygmalab/kaleidoscope_adapter.git
-	branch = main
+	url = https://github.com/domgee/kaleidoscope_adapter.git
+	branch = combos
