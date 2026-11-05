@@ -107,9 +107,14 @@ class Keyboard_
 
     uint8_t getLEDs();
 
+    /* Send (modifiers & ~remove) | add in every report. report_ keeps the unfiltered state for the plugins that read it */
+    void setModifierFilter(uint8_t remove, uint8_t add);
+
   private:
     HID_KeyboardReport_Data_t report_;
     HID_KeyboardReport_Data_t last_report_;
+    uint8_t filter_remove_ = 0;
+    uint8_t filter_add_ = 0;
 
     int sendReportUnchecked();
 };
