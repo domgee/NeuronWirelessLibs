@@ -126,7 +126,7 @@ int Keyboard_::sendReport() {
   // keycodes and non-modifier keycodes, we will need to send at least one extra
   // report. First, we compare the modifiers bytes of the two reports.
   const uint8_t old_modifiers = last_report_.modifiers;
-  const uint8_t new_modifiers = (uint8_t)((report_.modifiers & ~filter_remove_) | filter_add_);
+  const uint8_t new_modifiers = (uint8_t)((((report_.modifiers & ~filter_remove_) | filter_add_) & ~macro_remove_) | macro_add_);
 
   const uint8_t changed_modifiers = old_modifiers ^ new_modifiers;
 
@@ -279,6 +279,11 @@ void Keyboard_::releaseAll() {
 void Keyboard_::setModifierFilter(uint8_t remove, uint8_t add) {
   filter_remove_ = remove;
   filter_add_ = add;
+}
+
+void Keyboard_::setMacroModifierFilter(uint8_t remove, uint8_t add) {
+  macro_remove_ = remove;
+  macro_add_ = add;
 }
 
 Keyboard_ Keyboard;
