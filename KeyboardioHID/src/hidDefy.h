@@ -113,6 +113,10 @@ class HID_ {
   int begin();
   int SendReport(uint8_t id, const void* data, int len);
   bool SendLastReport();
+  /* Bytes queued in the report FIFO, report headers included */
+  uint16_t pendingReportBytes();
+  /* True when SendReport_ queues reports for a host instead of dropping them */
+  bool outputReady();
   void AppendDescriptor(HIDSubDescriptor* node);
 
   void hid_report_descriptor_get( const uint8_t ** pp_desc, uint32_t * p_desc_len );

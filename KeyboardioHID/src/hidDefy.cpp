@@ -145,6 +145,20 @@ bool HID_::SendLastReport()
     return success;
 }
 
+uint16_t HID_::pendingReportBytes()
+{
+    return tu_fifo_count(&tx_ff_hid);
+}
+
+bool HID_::outputReady()
+{
+#if defined(ARDUINO_NRF52_ADAFRUIT)
+    return !TinyUSBDevice.suspended() && (TinyUSBDevice.mounted() || ble_connected());
+#else
+    return true;
+#endif
+}
+
 HID_::HID_() : protocol(HID_REPORT_PROTOCOL), idle(0)
 {
     setReportData.reportId = 0;
